@@ -66,10 +66,31 @@ Breadboard (for prototyping and connections)
 Jumper Wires (for wiring the components together)
 
 ### Working
-- The user presses the panic button in an emergency.
+- The user presses the panic touch in an emergency in a touch sensor.
 - The microcontroller reads the input signal and activates the rescue mechanism.
-- The GPS module captures the real-time location.
-   - The GSM module sends an SMS containing:
-     - A distress message like "I am in danger. Please help!"
-     - Location coordinates (Google Maps link for easy navigation).
-   - Optionally, a buzzer or light on the badge activates to alert nearby people.
+- Notification is sent using Telegram bot 'Echo_Effect_bot' once the touch sensor is touched 3 times simultaneously.
+- A distress message like "HELP! Touch sensor triggered three times" in telegram bot and 'Sending HELP!' message through blynk IOT app.
+
+### Photos and videos
+Video and Images of our project is given
+https://drive.google.com/drive/folders/1ANogSmYQPLPjxc9ufg-RlQUS6agUsClL
+
+### Screenshots
+![Screenshot (4)](https://github.com/user-attachments/assets/d95a8d62-0a80-4066-9eb2-51ac088b78cd)
+
+![Screenshot (5)](https://github.com/user-attachments/assets/ff32e1ef-0155-46e8-b780-df63edd3d35b)
+
+![Screenshot (6)](https://github.com/user-attachments/assets/cb81d1ab-03a1-4450-aa8f-040722689ba7)
+
+![Screenshot (7)](https://github.com/user-attachments/assets/dd3b083a-d798-4557-93b8-d835c1245a28)
+
+![Screenshot (8)](https://github.com/user-attachments/assets/ad2ec406-f118-42a7-93a2-f8c67dc49035)
+
+### Build Photos
+
+![WhatsApp Image 2025-01-26 at 11 51 36_484caec9](https://github.com/user-attachments/assets/b1353fde-1188-46e2-9f81-37393ebc15c9)
+
+### Team Contributions
+- Theertha R - Blynk IOT
+- Swathy V - Telegram Bot
+- Anupama P - ESP8266 codes
