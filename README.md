@@ -16,9 +16,9 @@ In 2021, there were over 428,278 reported incidents of women abuse. There lacks 
 ### The solution:
 To provide a reliable and affordable access to safety. Smart Footwear is userfriendlywhich is lightweight and portable. Timely actions can result in impactful alerts.
 
-Technical details
+## Technical details
 
-Technologies/Components Used
+### Technologies/Components Used
 
 For Software:
 Languages Used:C++ Arduino IDE (Programming the ESP8266)
@@ -64,3 +64,5 @@ Tools Required:
 USB Cable (for programming and powering the ESP8266)
 Breadboard (for prototyping and connections)
 Jumper Wires (for wiring the components together)
+
+### Working
