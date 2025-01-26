@@ -1,4 +1,4 @@
-# Smart Footwear for women safety
+# Smart  for women safety
 ## An innovative approach to women safety.
 
 ### Team name: Echo-Effect
