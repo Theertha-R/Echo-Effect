@@ -1,1 +1,110 @@
+#define BLYNK_TEMPLATE_ID "TMPL3YC1xNv4S"
+#define BLYNK_TEMPLATE_NAME "Quickstart Template"
+#define BLYNK_AUTH_TOKEN "EpHcMzvA74UeQAsWG-k20O_EAN0bv2U8"
+#define TELEGRAM_BOT_TOKEN "7368955284:AAFTa8tA87gGjWrZDa3-ljl9RxwcH7CUF4Y" // Replace with your bot token
+#define TELEGRAM_CHAT_ID "1801674268" // Replace with your chat ID
+
+#include <ESP8266WiFi.h>
+#include <WiFiClientSecure.h> // For secure HTTPS requests to Telegram
+#include <BlynkSimpleEsp8266.h>
+
+// Wi-Fi credentials
+char ssid[] = "Galaxy F126963";
+char pass[] = "hgrb4659";
+
+WiFiClientSecure client;
+BlynkTimer timer;
+
+WidgetLCD lcd(V3);
+
+// Touch sensor pin (GPIO 5, or D1 on NodeMCU)
+const int touchPin = 5; // Use GPIO5 (D1 on NodeMCU)
+bool lastState = LOW;   // To track the sensor state
+int touchCount = 0;     // Counter for consecutive touches
+unsigned long lastTouchTime = 0; // Timestamp of the last touch
+const unsigned long touchTimeout = 2000; // 2 seconds timeout to reset counter
+
+// Function to send a message to Telegram
+void sendMessageToTelegram(String message) {
+  if (client.connect("api.telegram.org", 443)) {
+    String url = String("https://api.telegram.org/bot") + TELEGRAM_BOT_TOKEN + "/sendMessage?chat_id=" + TELEGRAM_CHAT_ID + "&text=" + message;
+
+    client.println("GET " + url + " HTTP/1.1");
+    client.println("Host: api.telegram.org");
+    client.println("Connection: close");
+    client.println();
+
+    Serial.println("Message sent to Telegram!");
+  } else {
+    Serial.println("Failed to connect to Telegram.");
+  }
+}
+
+// Function to check the touch sensor state
+void checkTouchSensor() {
+  int currentState = digitalRead(touchPin);
+
+  if (currentState == HIGH && lastState == LOW) {
+    unsigned long currentTime = millis();
+
+    // Check if the touch is within the timeout period
+    if (currentTime - lastTouchTime <= touchTimeout) {
+      touchCount++;
+    } else {
+      // Reset the counter if the touch is not within the timeout
+      touchCount = 1;
+    }
+
+    lastTouchTime = currentTime;
+
+    Serial.println("Touch detected! Count: " + String(touchCount));
+
+    if (touchCount == 3) {
+      Serial.println("Three touches detected! Sending HELP...");
+      sendMessageToTelegram("HELP! Touch sensor triggered three times.");
+      lcd.clear();
+      lcd.print(0, 0, "Sending HELP!");
+
+      // Reset the counter after triggering
+      touchCount = 0;
+    }
+  }
+
+  // Update the last state
+  lastState = currentState;
+}
+
+void setup() {
+  // Debug console
+  Serial.begin(115200);
+
+  // Connect to Wi-Fi
+  WiFi.begin(ssid, pass);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.println("Connecting to WiFi...");
+  }
+  Serial.println("Connected to WiFi!");
+
+  // Disable SSL verification for testing
+  client.setInsecure(); // This bypasses SSL verification for testing
+
+  // Connect to Blynk
+  Blynk.begin(BLYNK_AUTH_TOKEN, ssid, pass);
+
+  // Initialize the LCD
+  lcd.clear();
+  lcd.print(0, 0, "System Ready");
+
+  // Set up a timer to check the touch sensor every 100ms
+  timer.setInterval(100L, checkTouchSensor);
+
+  // Set touchPin as input
+  pinMode(touchPin, INPUT);
+}
+
+void loop() {
+  Blynk.run();
+  timer.run();
+}
 
