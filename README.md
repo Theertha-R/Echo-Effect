@@ -1,4 +1,4 @@
-# Smart  for women safety
+# Smart Rescue Badge for women safety
 ## An innovative approach to women safety.
 
 ### Team name: Echo-Effect
@@ -8,7 +8,7 @@
     Member 3: ANUPAMA P
     
 ### Project description:
-The project emphasizes on women safety by providing a wearable footwear as safety equipment. On giving continuous 3 taps on the footwear while in danger can give notification alert to the contacts presaved.
+A Rescue Badge for Women Safety is an innovative mini-project concept aimed at enhancing women's safety in emergency situations. This wearable device, often in the form of a badge, pendant, or wearable accessory, can send distress signals.
 
 ### The problem statement:
 In 2021, there were over 428,278 reported incidents of women abuse. There lacks a fast accessible mechanism to alert on the necessary personnel which can help in accessing undelayed response which can save many!!
@@ -66,3 +66,10 @@ Breadboard (for prototyping and connections)
 Jumper Wires (for wiring the components together)
 
 ### Working
+- The user presses the panic button in an emergency.
+- The microcontroller reads the input signal and activates the rescue mechanism.
+- The GPS module captures the real-time location.
+   - The GSM module sends an SMS containing:
+     - A distress message like "I am in danger. Please help!"
+     - Location coordinates (Google Maps link for easy navigation).
+   - Optionally, a buzzer or light on the badge activates to alert nearby people.
